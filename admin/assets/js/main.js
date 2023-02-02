@@ -125,5 +125,19 @@ function previewImgs(event) {
 }
 
 
+// Ajax Function Code Here.....
+function fetchSubCat(id){
+	$('#psubcat').html('');
+	$.ajax({
+		type:'post',
+		url:'ajaxdata.php',
+		data: {cat_id: id},
+		success: function(data){
+			$('#psubcat').html(data);
+		}
+	})
+}
+
+
 
 

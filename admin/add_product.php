@@ -2,16 +2,6 @@
         <?php include 'inc/side_menu.php'?>
 
         <div class="body">
-            <div class="body-header" id="body-header">
-                <h3>Dashboard</h3>
-                <ul>
-                    <li><a href="index.php">Home /</a></li>
-                    <li><a href="add_product.php">Products /</a></li>
-                    <li><a href="add_product.php?data=add">Add New Product /</a></li>
-                    <li><a href="add_product.php" class="active">All Product</a></li>
-                    <hr>
-                </ul>
-            </div>
             <!-- Body main section here -->
             <?php
                 $data = isset($_GET['data']) ? $_GET['data'] : 'view';
@@ -20,7 +10,16 @@
                         // View code heare
                         ?>
 
-
+                            <div class="body-header" id="body-header">
+                                <h3>Dashboard</h3>
+                                <ul>
+                                    <li><a href="index.php">Home /</a></li>
+                                    <li><a href="add_product.php">Products /</a></li>
+                                    <li><a href="add_product.php?data=add">Add New Product /</a></li>
+                                    <li><a href="add_product.php" class="active">All Product</a></li>
+                                    <hr>
+                                </ul>
+                            </div>
                             <div class="products">
                                 <div class="view-products">
                                     <div class="row mb-5">
@@ -95,101 +94,124 @@
                     if($data == 'add'){
                         // View code heare
                         ?>
-                            <div class="add_product">
-                                <div class="row">
-                                    <div class="col-md-8 p-5">
-                                        <form action="">
-                                            <div class="add_p">
-                                                <div class="row">
-                                                    <div class="col-md-6 p_name">
-                                                        <label for="">Product Name<span class="required">*</span></label>
-                                                        <input type="text" placeholder="Enter Product Name" required>
+                            <div class="body-header" id="body-header">
+                                <h3>Dashboard</h3>
+                                <ul>
+                                    <li><a href="index.php">Home /</a></li>
+                                    <li><a href="add_product.php">Products /</a></li>
+                                    <li><a href="add_product.php?data=add" class="active">Add New Product /</a></li>
+                                    <li><a href="add_product.php">All Product</a></li>
+                                    <hr>
+                                </ul>
+                            </div>
+                            <form action="core/insert.php" method="POST" enctype="multipart/form-data">
+                                <div class="add_product mt-5">
+                                    <div class="row">
+                                        <div class="col-md-8 p-5">
+                                            <form action="">
+                                                <div class="add_p">
+                                                    <div class="row">
+                                                        <div class="col-md-4 p_name">
+                                                            <label for="">Product Name<span class="required">*</span></label>
+                                                            <input type="text" placeholder="Enter Product Name" required>
+                                                        </div>
+                                                        <div class="col-md-4 p_name">
+                                                            <label for="">Product Category</label>
+                                                            <select name="product_cat" id="pcat" onchange="fetchSubCat(this.value)">
+                                                                <option value="">Choose Category.....</option>
+                                                                <?php
+                                                                    $product_cat_sql = "SELECT * FROM mart_category WHERE  is_parent='0' ORDER BY cat_name ASC";
+                                                                    $product_cat_res = mysqli_query($db,$product_cat_sql);
+                                                                    while($product_cat_row = mysqli_fetch_assoc($product_cat_res)){
+                                                                        $cat_id     = $product_cat_row['ID'];
+                                                                        $cat_name   = $product_cat_row['cat_name'];
+                                                                        ?><option value="<?php echo $cat_id;?>"><?php echo $cat_name;?></option><?php
+                                                                    }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4 p_name">
+                                                            <label for="">Product Sub-Category</label>
+                                                            <select name="product_cat" id="psubcat">
+                                                                <option value="">Choose Category.....</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6 p_name">
-                                                        <label for="">Product Category</label>
-                                                        <select name="" id="">
-                                                            <option value="">Choose Category.....</option>
-                                                            <option value="">Electronics</option>
-                                                            <option value="">Bags</option>
-                                                            <option value="">Clothes</option>
-                                                            <option value="">Plants</option>
-                                                        </select>
+                                                    <div class="row mt-4">
+                                                        <div class="p_name">
+                                                            <label for="" class="mb-2">Short Description<span class="required">*</span></label>
+                                                            <textarea name="" id="" cols="30" rows="2" placeholder="Product Short Description Here....." required></textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row mt-4">
-                                                    <div class="p_name">
-                                                        <label for="" class="mb-2">Short Description<span class="required">*</span></label>
-                                                        <textarea name="" id="" cols="30" rows="2" placeholder="Product Short Description Here....." required></textarea>
+                                                    <div class="row mt-4">
+                                                        <div class="p_name">
+                                                            <label for="" class="mb-2">Big Description</label>
+                                                            <div ng-app="quillTest" ng-controller="AppCtrl">
+                                                                <ng-quill-editor ng-model="title" on-editor-created="editorCreated(editor)" on-content-changed="contentChanged(editor, html, text)" placeholder="Product Big Description Here..."></ng-quill-editor>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row mt-4">
-                                                    <div class="p_name">
-                                                        <label for="" class="mb-2">Big Description</label>
-                                                        <div ng-app="quillTest" ng-controller="AppCtrl">
-                                                            <ng-quill-editor ng-model="title" on-editor-created="editorCreated(editor)" on-content-changed="contentChanged(editor, html, text)" placeholder="Product Big Description Here..."></ng-quill-editor>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <form action="" method="post" enctype="multipart/form-data" id="form-upload">
+                                                                <div class="form-group mt-5">
+                                                                    <label for="">Choose Gallery Images</label>
+                                                                    <input type="file" class="form-control mb-4 mt-1 py-1 px-2" name="images[]" multiple id="upload-img" />
+                                                                </div>
+                                                                <div class="img-thumbs img-thumbs-hidden" id="img-preview"></div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <form action="" method="post" enctype="multipart/form-data" id="form-upload">
-                                                            <div class="form-group mt-5">
-                                                                <label for="">Choose Gallery Images</label>
-                                                                <input type="file" class="form-control mb-4 mt-1 py-1 px-2" name="images[]" multiple id="upload-img" />
-                                                            </div>
-                                                            <div class="img-thumbs img-thumbs-hidden" id="img-preview"></div>
-                                                        </form>
-                                                    </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-4 p-5">
+                                            <div class="row p_price">
+                                                <div class="col-md-6">
+                                                    <label for="">Regular Price<span class="required">*</span></label>
+                                                    <input type="text" name="" class="mt-2">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="">Offer Price</label>
+                                                    <input type="text" name="" class="mt-2" required>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-4 p-5">
-                                        <div class="row p_price">
-                                            <div class="col-md-6">
-                                                <label for="">Regular Price<span class="required">*</span></label>
-                                                <input type="text" name="" class="mt-2">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="">Offer Price</label>
-                                                <input type="text" name="" class="mt-2" required>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-4">
-                                            <div>
-                                                <label for="">Product Brand</label>
-                                                <select name="" id="">
-                                                    <option value="">Choose Brand.....</option>
-                                                    <option value="">Brand-1</option>
-                                                    <option value="">Brand-2</option>
-                                                    <option value="">Brand-3</option>
-                                                    <option value="">Brand-4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="panel">
-                                                <div class="button_outer">
-                                                    <div class="btn_upload">
-                                                        <input type="file" id="upload_file" name="choose_file">
-                                                        Upload Image
-                                                    </div>
-                                                    <div class="processing_bar"></div>
-                                                    <div class="success_box"></div>
+                                            <div class="row mt-4">
+                                                <div>
+                                                    <label for="">Product Brand</label>
+                                                    <select name="" id="">
+                                                        <option value="">Choose Brand.....</option>
+                                                        <option value="">Brand-1</option>
+                                                        <option value="">Brand-2</option>
+                                                        <option value="">Brand-3</option>
+                                                        <option value="">Brand-4</option>
+                                                    </select>
                                                 </div>
-                                                <h5>Upload Features Image</h5>
                                             </div>
-                                            <div class="error_msg"></div>
-                                            <div class="uploaded_file_view" id="uploaded_view">
-                                                <span class="file_remove">X</span>
+                                            <div class="row">
+                                                <div class="panel">
+                                                    <div class="button_outer">
+                                                        <div class="btn_upload">
+                                                            <input type="file" id="upload_file" name="choose_file">
+                                                            Upload Image
+                                                        </div>
+                                                        <div class="processing_bar"></div>
+                                                        <div class="success_box"></div>
+                                                    </div>
+                                                    <h5>Upload Features Image</h5>
+                                                </div>
+                                                <div class="error_msg"></div>
+                                                <div class="uploaded_file_view" id="uploaded_view">
+                                                    <span class="file_remove">X</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="publish">
-                                            <button type="submit">Publish</button>
+                                            <div class="publish">
+                                                <button type="submit" name="product_add">Publish</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         <?php
                     }
                     if($data == 'edit'){

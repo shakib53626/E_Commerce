@@ -98,3 +98,13 @@ if(isset($_POST['add_brand'])){
         }
     }
 }
+
+
+
+
+// Add Product Insert Code Here........
+
+
+if(isset($_POST['product_add'])){
+    
+}
