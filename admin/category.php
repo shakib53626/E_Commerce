@@ -137,8 +137,8 @@
                                             ?>
                                                 <tr>
                                                     <th scope="row"><?php echo $serial;?></th>
-                                                    <td><img src="assets/img/products/<?php echo $cat_img;?>" alt="" width="40"></td>
-                                                    <td><img src="assets/img/products/<?php echo '';?>" alt="" width="40"></td>
+                                                    <td><img src="assets/img/categorys/<?php echo $cat_img;?>" alt="" width="40"></td>
+                                                    <td><img src="assets/img/categorys/<?php echo '';?>" alt="" width="40"></td>
                                                     <td><?php echo $cat_name;?></td>
                                                     <td><?php echo $sub_cname;?></td>
                                                     <td>
@@ -264,7 +264,7 @@ if(isset($_GET['edit_id'])){
                                             echo '<p class="alert alert-danger">No Image Found</p>';
                                         }else{
                                             ?>
-                                            <div class="mb-3"><img src="assets/img/products/<?php echo $edit_cat_img;?>" alt="" width="100"></div>
+                                            <div class="mb-3"><img src="assets/img/categorys/<?php echo $edit_cat_img;?>" alt="" width="100"></div>
                                             <?php
                                         }
                                     

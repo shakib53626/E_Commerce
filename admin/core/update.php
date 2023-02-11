@@ -17,8 +17,13 @@ if(isset($_POST['update_category'])){
 
         $extensions = array('png', 'jpg', 'jpeg');
         if(in_array($file_extn,$extensions) === true){
+            $file_name_res = mysqli_query($db,"SELECT cat_img FROM mart_category WHERE ID='$editid'");
+            $file_row = mysqli_fetch_assoc($file_name_res);
+            $pfile_name = $file_row['cat_img'];
+            unlink('../assets/img/categorys/'.$pfile_name);
+
             $update_name = rand().$file_name;
-            move_uploaded_file($tmp_name, '../assets/img/products/'.$update_name);
+            move_uploaded_file($tmp_name, '../assets/img/categorys/'.$update_name);
             $cat_update_sql = "UPDATE mart_category SET cat_name='$update_cat_name', cat_img='$update_name', is_parent='$update_is_parent', cat_status='$update_cat_status' WHERE ID='$editid'";
             $cat_update_res = mysqli_query($db,$cat_update_sql);
             if($cat_update_res){
@@ -60,6 +65,11 @@ if(isset($_POST['update_brand'])){
 
         $extensions = array('png', 'jpg', 'jpeg');
         if(in_array($file_extn,$extensions) === true){
+            $file_name_res = mysqli_query($db,"SELECT Brand_Image FROM mart_brand WHERE ID='$beditid'");
+            $file_row = mysqli_fetch_assoc($file_name_res);
+            $pfile_name = $file_row['Brand_Image'];
+            unlink('../assets/img/brands/'.$pfile_name);
+
             $update_name = rand().$file_name;
             move_uploaded_file($tmp_name, '../assets/img/brands/'.$update_name);
             $brand_update_sql = "UPDATE mart_brand SET Brand_Name='$update_brand_name', Brand_Image='$update_name', is_parent='$update_is_parent', Brand_Status='$update_brand_status' WHERE ID='$beditid'";

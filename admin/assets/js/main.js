@@ -128,6 +128,7 @@ function previewImgs(event) {
 // Ajax Function Code Here.....
 function fetchSubCat(id){
 	$('#psubcat').html('');
+	$('#epsubcat').html('');
 	$.ajax({
 		type:'post',
 		url:'ajaxdata.php',
@@ -136,8 +137,21 @@ function fetchSubCat(id){
 			$('#psubcat').html(data);
 		}
 	})
+	$.ajax({
+		type:'post',
+		url:'ajaxdata.php',
+		data: {ecat_id: id},
+		success: function(data){
+			$('#epsubcat').html(data);
+		}
+	})
 }
 
+
+
+//  log Description Js Code here......
+
+CKEDITOR.replace('editor');
 
 
 

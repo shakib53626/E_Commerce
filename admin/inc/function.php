@@ -18,8 +18,8 @@ function Show_Sub_Category($cat_id){
         ?>
             <tr>
                 <th scope="row"><?php echo '-';?></th>
-                <td><img src="assets/img/products/<?php echo '';?>" alt="" width="40"></td>
-                <td><img src="assets/img/products/<?php echo $cat_img;?>" alt="" width="40"></td>
+                <td><img src="assets/img/categorys/<?php echo '';?>" alt="" width="40"></td>
+                <td><img src="assets/img/categorys/<?php echo $cat_img;?>" alt="" width="40"></td>
                 <td><?php echo '<span class="sub_cat_icon text-center"><i class="fa-solid fa-arrow-turn-up text-info"></i></span>';?></td>
                 <td><?php echo $cat_name;?></td>
                 <td>
@@ -56,5 +56,34 @@ function Show_Sub_Category($cat_id){
 
 
 
-// Add Category Form Function
+// Find Cat name brand name and isparent name......
 
+function findVal($field,$table,$fKey){
+    global $db;
+    
+    $catName=mysqli_query($db,"SELECT $field FROM $table WHERE ID='$fKey'");
+    $row=mysqli_fetch_assoc($catName);
+    $cat_name = $row[$field];
+    echo $cat_name;
+    return $cat_name;
+}
+
+
+// Delete With Image Function......
+function deleteProduct(){
+    global $db;
+    if(isset($_GET['del_id'])){
+        $del_id = $_GET['del_id'];
+        $file_name_res = mysqli_query($db,"SELECT p_featured_img FROM mart_product WHERE ID='$del_id'");
+        $file_row = mysqli_fetch_assoc($file_name_res);
+        $file_name = $file_row['p_featured_img'];
+        unlink('assets/img/products/'.$file_name);
+
+        $res = mysqli_query($db,"DELETE FROM mart_product WHERE ID='$del_id'");
+        if($res){
+            header('location: add_product.php');
+        }else{
+            die('Add product delete Error!'.mysqli_error($db));
+        }
+    }
+}

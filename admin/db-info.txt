@@ -14,3 +14,25 @@ CREATE TABLE mart_category(
     cat_status int DEFAULT 0 COMMENT '0 for Deactive 1 for active',
     PRIMARY KEY (ID)
 )
+
+CREATE TABLE mart_product(
+        ID int AUTO_INCREMENT,
+        p_name varchar(50) NOT null,
+        p_category int(11),
+        p_sub_category int(11),
+        p_brand int(11),
+        p_reg_price int(11),
+        p_offer_price int(11),
+    	p_featured_img varchar(255),
+    	p_img_gallery text(500),
+    	p_short_desc text(500) NOT null,
+    	p_long_desc text(2000),
+    	p_stock int(11),
+        p_status int DEFAULT 0 COMMENT '0 for Deactive 1 for active',
+    PRIMARY KEY (ID),
+    FOREIGN KEY (p_category) REFERENCES mart_category(ID),
+    FOREIGN KEY (p_sub_category) REFERENCES mart_category(ID),
+    FOREIGN KEY (p_brand) REFERENCES mart_brand(ID),
+)
+
+

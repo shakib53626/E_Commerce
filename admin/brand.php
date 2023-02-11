@@ -22,10 +22,7 @@
 
                             <form action="core/insert.php" method="POST" enctype="multipart/form-data"><!--Add Category Form code Start-->
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="" class="mb-2">Brand Name</label>
-                                        <input type="text" placeholder="Enter Brand name..." name="brand_name" required>
-                                        
+                                    <div class="col-md-6">                                        
                                         <div class="panel">
                                             <div class="button_outer">
                                                 <div class="btn_upload">
@@ -46,27 +43,10 @@
 
 
                                     <div class="col-md-6">
-                                        <label for="" class="mb-2 d-block">Choose Brand Category</label>
-                                        <select name="is_parent" id="">
-                                            <option value="">Choose Brand Category......</option>
-                                            <?php
-                                            $cat_info_sql = "SELECT * FROM mart_category WHERE is_parent='0' ORDER BY cat_name ASC";
-                                            $cat_info_res = mysqli_query($db,$cat_info_sql);
-                                            $serial = 0;
-                                            
-                                            while($cat_info_row = mysqli_fetch_assoc($cat_info_res)){
-                                                $cat_id     = $cat_info_row['ID'];
-                                                $cat_name   = $cat_info_row['cat_name'];
-                                                $cat_img    = $cat_info_row['cat_img'];
-                                                $is_parent  = $cat_info_row['is_parent'];
-                                                $cat_status = $cat_info_row['cat_status'];
-                                                ?><option value="<?php echo $cat_id;?>" name="brand_cat_name"><?php echo $cat_name;?></option><?php
-                                            
-                                            }
-
-                                            ?>
-                
-                                        </select>
+                                        <div>
+                                            <label for="" class="mb-2">Brand Name</label>
+                                            <input type="text" placeholder="Enter Brand name..." name="brand_name" required>
+                                        </div>
                                         <div class="cat-status mt-4">
                                             <label for="" class="mb-2 d-block">Choose Brand Status</label>
                                             <select name="brand_status" id="">
@@ -102,8 +82,6 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Brand Icon</th>
                                 <th scope="col">Brand Name</th>
-                                <th scope="col">Brand Category</th>
-                                <th scope="col">Brand Sub-Category</th>
                                 <th scope="col">Brand Status</th>
                                 <th scope="col" class="text-end">Action</th>
                             </tr>
@@ -117,9 +95,7 @@
                                 while($brand_info_row = mysqli_fetch_assoc($brand_info_res)){
                                     $brand_id     = $brand_info_row['ID'];
                                     $brand_name   = $brand_info_row['Brand_Name'];
-                                    $Brand_Category   = $brand_info_row['Brand_Category'];
                                     $brand_img    = $brand_info_row['Brand_Image'];
-                                    $is_parent    = $brand_info_row['Is_Parent'];
                                     $brand_status = $brand_info_row['Brand_Status'];
                                     $serial++;
 
@@ -129,8 +105,6 @@
                                         <th scope="row"><?php echo $serial;?></th>
                                         <td><img src="assets/img/brands/<?php echo $brand_img;?>" alt="" width="40"></td>
                                         <td><?php echo $brand_name;?></td>
-                                        <td ><?php echo $Brand_Category;?></td>
-                                        <td><?php echo '';?></td>
                                         <td><?php if($brand_status == 0)echo '<span class="badge bg-danger">Deactive</span>';else echo '<span class="badge bg-success">Active</span>';?></td>
                                         <td class="text-end">
                                             <a href="brand.php?bedit_id=<?php echo $brand_id;?>" class="cat_edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
@@ -227,10 +201,7 @@ if(isset($_GET['bedit_id'])){
 
                     <form action="core/update.php" method="POST" enctype="multipart/form-data"><!--Add Category Form code Start-->
                         <div class="row">
-                            <div class="col-md-6">
-                                <label for="" class="mb-2">Brand Name</label>
-                                <input type="text" value="<?php echo $edit_brand_name;?>" placeholder="Enter category name..." name="brand_name" required>
-                                
+                            <div class="col-md-6">                                
                                 <div class="panel">
                                     <?php
                                         if(empty($edit_brand_img)){
@@ -260,27 +231,10 @@ if(isset($_GET['bedit_id'])){
 
 
                             <div class="col-md-6">
-                                <label for="" class="mb-2 d-block">Brand Category</label>
-                                <select name="is_parent" id="">
-                                    <option value="">Choose Category......</option>
-                                    <?php
-                                    $cat_info_sql = "SELECT * FROM mart_category WHERE is_parent='0' ORDER BY cat_name ASC";
-                                    $cat_info_res = mysqli_query($db,$cat_info_sql);
-                                    $serial = 0;
-                                    
-                                    while($cat_info_row = mysqli_fetch_assoc($cat_info_res)){
-                                        $cat_id     = $cat_info_row['ID'];
-                                        $cat_name   = $cat_info_row['cat_name'];
-                                        $cat_img    = $cat_info_row['cat_img'];
-                                        $is_parent  = $cat_info_row['is_parent'];
-                                        $cat_status = $cat_info_row['cat_status'];
-                                        ?><option value="<?php echo $edit_brand_cname;?>" <?php if($edit_is_parent == $edit_brand_cname)echo 'selected';?>><?php echo $edit_brand_cname;?></option><?php
-                                    
-                                    }
-
-                                    ?>
-        
-                                </select>
+                                <div>
+                                    <label for="" class="mb-2">Brand Name</label>
+                                    <input type="text" value="<?php echo $edit_brand_name;?>" placeholder="Enter category name..." name="brand_name" required>
+                                </div>
 
                                 <div class="cat-status mt-4">
                                     <label for="" class="mb-2 d-block">Category Status</label>

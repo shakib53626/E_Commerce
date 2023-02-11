@@ -2,6 +2,7 @@
 include 'inc/connection.php';
 
 if($_POST['cat_id']){
+    $e_id    =$_GET['ed_id'];
     $cat_pid = $_POST['cat_id'];
     $product_cat_sql = "SELECT * FROM mart_category WHERE  is_parent=$cat_pid";
     $product_cat_res = mysqli_query($db,$product_cat_sql);
