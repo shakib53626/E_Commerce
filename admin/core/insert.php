@@ -156,3 +156,32 @@ if(isset($_POST['product_add'])){
     }
     
 }
+
+
+// Coupon Insert Code HEre........
+
+if(isset($_POST['add_coupon'])){
+    $copon_code     = $_POST['copon_code'];
+    $dis_amount     = $_POST['dis_amount'];
+    $dis_type       = $_POST['dis_type'];
+    $Copon_sdate    = $_POST['Copon_sdate'];
+    $Copon_edate    = $_POST['Copon_edate'];
+    $dis_object     = $_POST['dis_object'];
+    $dis_on         = $_POST['dis_on'];
+    $dis_status     = $_POST['dis_status'];
+
+
+    $id_array = '';
+    foreach($dis_on as $data){
+        $data = ','.$data;
+        $id_array .= $data;
+    }
+        $dis_sql    = "INSERT INTO mart_coupon(coupon_code,amount,dis_on,start_date,end_date,dis_on_type,discount_on,copon_status) VALUES ('$copon_code','$dis_amount','$dis_type','$Copon_sdate','$Copon_edate','$dis_object','$id_array','$dis_status')";
+        $dis_res    = mysqli_query($db,$dis_sql);
+        if($dis_res){
+            header('location: ../copon_code.php');
+        }else{
+            die('Copon Code add error!'.mysqli_error($db));
+        }
+    
+}

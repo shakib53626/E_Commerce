@@ -94,3 +94,42 @@ if(isset($_POST['update_brand'])){
     }
 
 }
+
+// Coupon Update Code HEre........
+
+if(isset($_POST['edit_coupon'])){
+    $editID  = $_POST['editid'];
+    $copon_code     = $_POST['copon_code'];
+    $dis_amount     = $_POST['dis_amount'];
+    $dis_type       = $_POST['dis_type'];
+    $Copon_sdate    = $_POST['Copon_sdate'];
+    $Copon_edate    = $_POST['Copon_edate'];
+    $dis_object     = $_POST['dis_object'];
+    $dis_on         = $_POST['edis_on'];
+    $dis_status     = $_POST['dis_status'];
+
+
+    if(!empty($dis_on)){
+        $id_array = '';
+        foreach($dis_on as $data){
+            $data = ','.$data;
+            $id_array .= $data;
+        }
+        $dis_sql    = "UPDATE mart_coupon SET coupon_code='$copon_code', amount='$dis_amount', dis_on='$dis_type', start_date='$Copon_sdate', end_date='$Copon_edate', dis_on_type='$dis_object', discount_on='$id_array', copon_status='$dis_status' WHERE ID='$editID'";
+        $dis_res    = mysqli_query($db,$dis_sql);
+        if($dis_res){
+            header('location: ../copon_code.php');
+        }else{
+            die('Copon Code add error!'.mysqli_error($db));
+        }
+    }else{
+        $dis_sql    = "UPDATE mart_coupon SET coupon_code='$copon_code', amount='$dis_amount', dis_on='$dis_type', start_date='$Copon_sdate', end_date='$Copon_edate', dis_on_type='$dis_object', copon_status='$dis_status' WHERE ID='$editID'";
+        $dis_res    = mysqli_query($db,$dis_sql);
+        if($dis_res){
+            header('location: ../copon_code.php');
+        }else{
+            die('Copon Code add error!'.mysqli_error($db));
+        }
+    }
+    
+}

@@ -8,7 +8,7 @@
                         <div class="content">
                             <ul>
                                 <li><i class="fa-regular fa-circle"></i> All Orders</li>
-                                <li><i class="fa-regular fa-circle"></i> Coupon Code</li>
+                                <li><i class="fa-regular fa-circle"></i><a href="copon_code.php"> Coupon Code</a></li>
                                 <li><i class="fa-regular fa-circle"></i> Payment Getway</li>
                             </ul>
                         </div>

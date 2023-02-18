@@ -330,7 +330,7 @@ Add Category Body section Css Code
     background: #fff;
     margin-top: 20px;
     border-radius: 10px;
-    padding: 40px;
+    padding: 40px 40px 60px 40px;
     width: 800px;
     position: relative;
     background: #fff;
@@ -369,8 +369,9 @@ Add Category Body section Css Code
 .cat-add-btn,
 .brand-add-btn{
     position: absolute;
-    bottom: 30px;
+    bottom: 15px;
     right: 40px;
+    
 }
 .cat-add-btn button,
 .brand-add-btn button{
@@ -567,6 +568,20 @@ Add Product css code start
   }
   .ql-toolbar{
     border-bottom: 1px solid green !important;
+  }
+  /* Copon Code Css  code */
+  .copon_date input,
+  .copon_date select{
+    font-size: 14px;
+  }
+  .random-gen-btn a{
+    padding: 8px 30px;
+    background: green;
+    color: #fff;
+  }
+  .random-gen-btn a:hover{
+    background: rgb(30, 160, 30);
+    color: #fff;
   }
   
   

@@ -87,3 +87,18 @@ function deleteProduct(){
         }
     }
 }
+// Delete without image.......
+
+function delete($deleteID,$db_name,$location){
+    global $db;
+    if(isset($_GET[$deleteID])){
+        $del_id = $_GET[$deleteID];
+
+        $res = mysqli_query($db,"DELETE FROM $db_name WHERE ID='$del_id'");
+        if($res){
+            header($location);
+        }else{
+            die('Add product delete Error!'.mysqli_error($db));
+        }
+    }
+}

@@ -203,6 +203,10 @@
 
 if(isset($_GET['del_id'])){
     $del_id = $_GET['del_id'];
+    $file_name_res = mysqli_query($db,"SELECT cat_img FROM mart_category WHERE ID='$del_id'");
+    $file_row = mysqli_fetch_assoc($file_name_res);
+    $file_name = $file_row['cat_img'];
+    unlink('assets/img/categorys/'.$file_name);
 
     $cat_del_res = mysqli_query($db,"DELETE FROM mart_category WHERE ID='$del_id'");
     if($cat_del_res){

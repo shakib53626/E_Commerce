@@ -128,7 +128,6 @@ function previewImgs(event) {
 // Ajax Function Code Here.....
 function fetchSubCat(id){
 	$('#psubcat').html('');
-	$('#epsubcat').html('');
 	$.ajax({
 		type:'post',
 		url:'ajaxdata.php',
@@ -137,15 +136,30 @@ function fetchSubCat(id){
 			$('#psubcat').html(data);
 		}
 	})
+}
+function discountObject(id){
+	$('#dis_on').html('');
 	$.ajax({
 		type:'post',
 		url:'ajaxdata.php',
 		data: {ecat_id: id},
 		success: function(data){
-			$('#epsubcat').html(data);
+			$('#dis_on').html(data);
 		}
 	})
 }
+function discountObj(id){
+	$('#udis_on').html('');
+	$.ajax({
+		type:'post',
+		url:'ajaxdata.php',
+		data: {ucat_id: id},
+		success: function(data){
+			$('#udis_on').html(data);
+		}
+	})
+}
+
 
 
 
@@ -153,5 +167,19 @@ function fetchSubCat(id){
 
 CKEDITOR.replace('editor');
 
+
+
+// Random String code genetate.......
+function generate() {
+	let length = 7;
+	const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	let result = ' ';
+	const charactersLength = characters.length;
+	for(let i = 0; i < length; i++) {
+		result += 
+		characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+	document.getElementById("strlength").value = result;
+}
 
 
