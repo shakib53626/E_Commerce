@@ -133,3 +133,104 @@ if(isset($_POST['edit_coupon'])){
     }
     
 }
+
+
+
+
+// users Update PHP Code here.......
+
+if(isset($_POST['update_user'])){
+    $editID         =  $_POST['editID'];
+
+    $user_name      = $_POST['user_name'];
+    $user_mail      = $_POST['user_mail'];
+    $user_pass      = $_POST['user_pass'];
+    $phone          = $_POST['phone'];
+    $user_status    = $_POST['user_status'];
+    $address        = $_POST['address'];
+    $file_name      = $_FILES['choose_file']['name'];
+    $tmp_name       = $_FILES['choose_file']['tmp_name'];
+    $file_size      = $_FILES['choose_file']['size'];
+
+
+    if(!empty($user_pass)  && !empty($file_name)){
+
+        $file_name = $_FILES['choose_file']['name'];
+        $tmp_name = $_FILES['choose_file']['tmp_name'];
+
+        $extn = explode('.', $file_name);
+        $file_extn = strtolower(end($extn));
+
+        $extensions = array('png', 'jpg', 'jpeg');
+        if(in_array($file_extn,$extensions) === true){
+            $file_name_res = mysqli_query($db,"SELECT user_img FROM mart_user WHERE ID='$editID'");
+            $file_row = mysqli_fetch_assoc($file_name_res);
+            $pfile_name = $file_row['user_img'];
+            unlink('../assets/img/users/'.$pfile_name);
+
+            $update_name = rand().$file_name;
+            move_uploaded_file($tmp_name, '../assets/img/users/'.$update_name);
+            $brand_update_sql = "UPDATE mart_user SET user_name='$user_name', user_mail='$user_mail', pass='$user_pass', phone='$phone', user_address='$address', user_img='$update_name', user_status='$user_status' WHERE ID='$editID'";
+            $brand_update_res = mysqli_query($db,$brand_update_sql);
+            if($brand_update_res){
+                header('location: ../users.php');
+            }else{
+                die('user Update Error!'.mysqli_error($db));
+            }
+        }else{
+            echo 'Please Upload and Image File';
+        }
+    
+    }
+    else if(empty($user_pass)  && !empty($file_name)){
+
+        $file_name = $_FILES['choose_file']['name'];
+        $tmp_name = $_FILES['choose_file']['tmp_name'];
+
+        $extn = explode('.', $file_name);
+        $file_extn = strtolower(end($extn));
+
+        $extensions = array('png', 'jpg', 'jpeg');
+        if(in_array($file_extn,$extensions) === true){
+            $file_name_res = mysqli_query($db,"SELECT user_img FROM mart_user WHERE ID='$editID'");
+            $file_row = mysqli_fetch_assoc($file_name_res);
+            $pfile_name = $file_row['user_img'];
+            unlink('../assets/img/users/'.$pfile_name);
+
+            $update_name = rand().$file_name;
+            move_uploaded_file($tmp_name, '../assets/img/users/'.$update_name);
+            $brand_update_sql = "UPDATE mart_user SET user_name='$user_name', user_mail='$user_mail', phone='$phone', user_address='$address', user_img='$update_name', user_status='$user_status' WHERE ID='$editID'";
+            $brand_update_res = mysqli_query($db,$brand_update_sql);
+            if($brand_update_res){
+                header('location: ../users.php');
+            }else{
+                die('user Update Error!'.mysqli_error($db));
+            }
+        }else{
+            echo 'Please Upload and Image File';
+        }
+    
+    }
+    else if(!empty($user_pass)  && empty($file_name)){;
+
+        
+            $brand_update_sql = "UPDATE mart_user SET user_name='$user_name', user_mail='$user_mail', phone='$phone', user_address='$address', pass='$user_pass', user_status='$user_status' WHERE ID='$editID'";
+            $brand_update_res = mysqli_query($db,$brand_update_sql);
+            if($brand_update_res){
+                header('location: ../users.php');
+            }else{
+                die('user Update Error!'.mysqli_error($db));
+            }
+    
+    }else{
+            $brand_update_sql = "UPDATE mart_user SET user_name='$user_name', user_mail='$user_mail', phone='$phone', user_address='$address', user_status='$user_status' WHERE ID='$editID'";
+            $brand_update_res = mysqli_query($db,$brand_update_sql);
+            if($brand_update_res){
+                header('location: ../users.php');
+            }else{
+                die('user Update Error!'.mysqli_error($db));
+            }
+    }
+
+
+}

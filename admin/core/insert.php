@@ -185,3 +185,57 @@ if(isset($_POST['add_coupon'])){
         }
     
 }
+
+
+// Add Users Insert Code........
+
+
+if(isset($_POST['add_user'])){
+    $user_name      = $_POST['user_name'];
+    $user_mail      = $_POST['user_mail'];
+    $user_pass      = $_POST['user_pass'];
+    $phone          = $_POST['phone'];
+    $user_status    = $_POST['user_status'];
+    $address        = $_POST['address'];
+    $file_name      = $_FILES['choose_file']['name'];
+    $tmp_name       = $_FILES['choose_file']['tmp_name'];
+    $file_size      = $_FILES['choose_file']['size'];
+
+    $mb_file_size = $file_size/(1024*1024);
+
+    if($mb_file_size > 1){
+        echo 'Warning! Maximum File Size 1MB';
+    }
+
+
+    $extn = explode('.', $file_name);
+    $file_extn = strtolower(end($extn));
+
+    $extensions = array('png', 'jpg', 'jpeg');
+
+    if(!empty($file_name)){
+        if(in_array($file_extn,$extensions) === true){
+            $update_name = rand().$file_name;
+            move_uploaded_file($tmp_name, '../assets/img/users/'.$update_name);
+            $cat_insert = "INSERT INTO mart_user (user_name,user_mail,pass,phone,user_address,user_img,user_status) VALUES ('$user_name','$user_mail', '$user_pass', '$phone','$address','$update_name','$user_status')";
+            $cat_insert_res = mysqli_query($db,$cat_insert);
+    
+            if($cat_insert_res){
+                header('location: ../users.php');
+            }else{
+                die('users Insert Error!'.mysqli_error($db));
+            }
+        }else{
+            echo 'Worning ! Please Upload and Image file (png,jpg,jpeg)!';
+        }
+    }else{
+        $cat_insert = "INSERT INTO mart_user (user_name,user_mail,pass,phone,user_address,user_status) VALUES ('$user_name','$user_mail', '$user_pass', '$phone','$address','$user_status')";
+        $cat_insert_res = mysqli_query($db,$cat_insert);
+
+        if($cat_insert_res){
+            header('location: ../users.php');
+        }else{
+            die('users Insert Error!'.mysqli_error($db));
+        }
+    }
+}

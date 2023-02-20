@@ -70,18 +70,18 @@ function findVal($field,$table,$fKey){
 
 
 // Delete With Image Function......
-function deleteProduct(){
+function deleteWithImg($del_id,$img_col,$table_name,$table_ID,$img_location,$page_location){
     global $db;
-    if(isset($_GET['del_id'])){
-        $del_id = $_GET['del_id'];
-        $file_name_res = mysqli_query($db,"SELECT p_featured_img FROM mart_product WHERE ID='$del_id'");
+    if(isset($_GET[$del_id])){
+        $del_id = $_GET[$del_id];
+        $file_name_res = mysqli_query($db,"SELECT $img_col FROM $table_name WHERE $table_ID='$del_id'");
         $file_row = mysqli_fetch_assoc($file_name_res);
-        $file_name = $file_row['p_featured_img'];
-        unlink('assets/img/products/'.$file_name);
+        $file_name = $file_row[$img_col];
+        unlink($img_location.$file_name);
 
-        $res = mysqli_query($db,"DELETE FROM mart_product WHERE ID='$del_id'");
+        $res = mysqli_query($db,"DELETE FROM $table_name WHERE $table_ID='$del_id'");
         if($res){
-            header('location: add_product.php');
+            header($page_location);
         }else{
             die('Add product delete Error!'.mysqli_error($db));
         }

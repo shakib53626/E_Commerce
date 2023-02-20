@@ -580,8 +580,21 @@ Add Product css code start
     color: #fff;
   }
   .random-gen-btn a:hover{
-    background: rgb(30, 160, 30);
+    background: rgb(22, 226, 22);
     color: #fff;
+  }
+  /* User Page Css code... */
+  textarea:focus{
+    outline: none;
+  }
+  .user_logo{
+    display: inline-block;
+    padding: 6px 14px;
+    color: white;
+    background: rgb(51, 135, 135) !important;
+    border-radius: 100%;
+    margin: 0;
+    font-size: 20px;
   }
   
   

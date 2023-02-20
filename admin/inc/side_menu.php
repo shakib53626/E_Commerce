@@ -27,14 +27,18 @@
                         <div class="label h-effict"><i class="fa-solid fa-chart-simple me-2"></i> Reports</div>
                     </div>
                     <div class="contentBx">
+                        <div class="label h-effict" onclick="location.href='users.php'"><i class="fa-regular fa-user me-2"></i> Users </div>
+                    </div>
+                    <!-- <div class="contentBx">
                         <div class="label"><i class="fa-regular fa-user me-2"></i> Users <i class="fa-solid fa-angle-down" id="downR"></i></div>
                         <div class="content">
                             <ul>
-                                <li onclick="location.href='add_users.php'"><i class="fa-regular fa-circle"></i> Add New User</li>
-                                <li><i class="fa-regular fa-circle"></i> View All Users</li>
+                                <li onclick="location.href='users.php'"><i class="fa-regular fa-circle"></i> Add New User</li>
+                                <li onclick="location.href='users.php'"><i class="fa-regular fa-circle"></i> View All Users</li>
+                                
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="contentBx">
                         <div class="label h-effict"><i class="fa-solid fa-sliders me-2"></i> Theme Options</div>
                     </div>

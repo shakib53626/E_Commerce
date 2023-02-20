@@ -112,7 +112,7 @@
                                                         </tr>
                                                     <?php
                                                 }
-                                                 deleteProduct();
+                                                deleteWithImg('del_id','p_featured_img','mart_product','ID','assets/img/products/','location: add_product.php');
                                             ?>
                                         </tbody>
                                     </table>

@@ -12,7 +12,7 @@
                 <ul>
                     <li><a href="index.php">Home /</a></li>
                     <li><a href="">Products /</a></li>
-                    <li><a href="add_products.php" class="active">Add Product</a></li>
+                    <li><a href="add_products.php" class="active">Add Category</a></li>
                 </ul>
                 <hr>
             </div>
@@ -271,7 +271,6 @@ if(isset($_GET['edit_id'])){
                                             <div class="mb-3"><img src="assets/img/categorys/<?php echo $edit_cat_img;?>" alt="" width="100"></div>
                                             <?php
                                         }
-                                    
                                     ?>
                                     <div class="button_outer button_outer_edit">
                                         <div class="btn_upload">
